@@ -1,0 +1,151 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Qos Project</title>
+    <!-- Boostrap 3 導入 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="jumbotron text-center">
+        <h1>Qos Project</h1>
+        <img src="http://sdnhub.org/wp-content/uploads/2014/03/mininet_two_switches1.png" class="img-rounded" alt="Cinque Terre">
+        <p> </p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h1>Queue Setting： </h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <form action="/myhome" method="post">
+                    <p>Max rate<input type="text" name="max_rate" value="{{ ori_max }}"></p>
+                    <p>Min rate<input type="text" name="min_rate" value="{{ ori_min }}"></p>
+                    <p>Class <input type="text" name="q_class" value="{{ ori_cla }}"></p>
+                    <p><input type="submit" value="add"></p>
+                </form>
+                <form action="/myhome" method="get">
+                    <p><input type="submit" value="delete"></p>
+                </form>
+                <form action="/queue_fd" method="get">
+                    <p><input type="submit" value="update"></p>
+                </form>
+                <form action="/queue_fd" method="post">
+                    <p>find<input type="text" name="find_id" value="{{ find_id }}"></p>
+                    <p><input type="submit" value="find"></p>
+                </form>
+
+
+            </div>
+            <div class="col-sm-6">
+                <table class="table table-striped">
+                    <!-- <table border="1"> -->
+                    <tr>
+                        <td>ID</td>
+                        <td>Max rate</td>
+                        <td>Min rate</td>
+                        <td>Class</td>
+                    </tr>
+                    {% for i in queue_set %}
+                    <tr>
+                        <td>{{ i.id }} </td>
+                        <td> {{ i.max_rate }} </td>
+                        <td>{{ i.min_rate }} </td>
+                        <td>{{ i.q_class }} </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <h1>Qos setting： </h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <form action="/qosset" method="post">
+                    <p>Priority<input type="text" name="priority"></p>
+                    <p>DSCP<input type="text" name="DSCP"></p>
+                    <p>Queue ID<input type="text" name="queue_id"></p>
+                    <p>Qos ID<input type="text" name="qos_id"></p>
+                    <p><input type="submit" name="submit"></p>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <table class="table table-striped">
+                    <!-- <table border="1"> -->
+                    <tr>
+                        <td>ID</td>
+                        <td>Max rate</td>
+                        <td>Min rate</td>
+                        <td>Class</td>
+                    </tr>
+                    {% for i in qos_set %}
+                    <tr>
+                        <td>{{ i.priority }} </td>
+                        <td> {{ i.DSCP }} </td>
+                        <td>{{ i.queue_id }} </td>
+                        <td>{{ i.qos_id }} </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <h1> </h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <form action="/router" method="post">
+                    <p>Priority<input type="text" name="priority"></p>
+                    <p>Dst address<input type="text" name="dst_addr"></p>
+                    <p>Dst port<input type="text" name="dst_port"></p>
+                    <p>Protocol<input type="text" name="proto"></p>
+                    <p>DSCP<input type="text" name="DSCP"></p>
+                    <p>Qos id<input type="text" name="qos_id"></p>
+                    <p><input type="submit" name="submit"></p>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <table class="table table-striped">
+                    <!-- <table border="1"> -->
+                    <tr>
+                        <td>Priority</td>
+                        <td>Dst address</td>
+                        <td>Dst port</td>
+                        <td>Protocol</td>
+                        <td>DSCP</td>
+                        <td>Qos id</td>
+                    </tr>
+                    {% for i in router_set %}
+                    <tr>
+                        <td>{{ i.priority }} </td>
+                        <td> {{ i.dst_addr }} </td>
+                        <td>{{ i.dst_port }} </td>
+                        <td>{{ i.proto}} </td>
+                        <td>{{ i.DSCP }} </td>
+                        <td>{{ i.qos_id }} </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+
+
+
+</body>
+
+</html>
